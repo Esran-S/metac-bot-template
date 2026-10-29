@@ -719,10 +719,10 @@ if __name__ == "__main__":
         # Free tier: when only a Google AI Studio key is set, use Gemini for every role
         # (no paid news search; the model researches from its own knowledge).
         **({"llms": {
-            "default": GeneralLlm(model="gemini/gemini-2.5-flash", temperature=0.3, timeout=90, allowed_tries=3),
-            "summarizer": "gemini/gemini-2.5-flash-lite",
-            "researcher": GeneralLlm(model="gemini/gemini-2.5-flash", temperature=0.2, timeout=90, allowed_tries=3),
-            "parser": "gemini/gemini-2.5-flash-lite",
+            "default": GeneralLlm(model="gemini/gemini-3-flash-preview", temperature=0.3, timeout=150, allowed_tries=3),
+            "summarizer": "gemini/gemini-flash-lite-latest",
+            "researcher": GeneralLlm(model="gemini/gemini-3-flash-preview", temperature=0.2, timeout=150, allowed_tries=3),
+            "parser": "gemini/gemini-flash-lite-latest",
         }} if os.getenv("GEMINI_API_KEY") and not os.getenv("OPENROUTER_API_KEY") else {}),
         # llms={
         #     "default": GeneralLlm(
