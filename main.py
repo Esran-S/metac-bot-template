@@ -710,7 +710,7 @@ if __name__ == "__main__":
     # uncomment and edit to pin specific models.
     template_bot = FallTemplateBot2026(
         research_reports_per_question=1,
-        predictions_per_research_report=5,
+        predictions_per_research_report=3 if (os.getenv("GEMINI_API_KEY") and not os.getenv("OPENROUTER_API_KEY")) else 5,  # free-tier rate limits
         use_research_summary_to_forecast=False,
         publish_reports_to_metaculus=publish_to_metaculus,
         folder_to_save_reports_to=None,
@@ -719,7 +719,7 @@ if __name__ == "__main__":
         # Free tier: when only a Google AI Studio key is set, use Gemini for every role
         # (no paid news search; the model researches from its own knowledge).
         **({"llms": {
-            "default": GeneralLlm(model="gemini/gemini-3-flash-preview", temperature=0.3, timeout=150, allowed_tries=3),
+            "default": GeneralLlm(model="gemini/gemini-flash-lite-latest", temperature=0.3, timeout=150, allowed_tries=4),
             "summarizer": "gemini/gemini-flash-lite-latest",
             "researcher": GeneralLlm(model="gemini/gemini-3-flash-preview", temperature=0.2, timeout=150, allowed_tries=3),
             "parser": "gemini/gemini-flash-lite-latest",
